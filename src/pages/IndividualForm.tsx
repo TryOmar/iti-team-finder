@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { ArrowLeft, UserPlus, Phone, Briefcase, Code, FileText } from 'lucide-react';
+import { ArrowLeft, UserPlus, Phone, Briefcase, Code, FileText, Trash2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
 import { supabase } from '../lib/supabase';
@@ -86,6 +86,32 @@ export default function IndividualForm() {
     } catch (error) {
       console.error('Error submitting form:', error);
       setMessage({ type: 'error', text: isEditMode ? t('errorUpdate') : t('errorSubmit') });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!initialData?.id || !window.confirm(t('confirmDelete'))) return;
+    
+    setLoading(true);
+    setMessage(null);
+
+    try {
+      const { error } = await supabase
+        .from('individuals')
+        .delete()
+        .eq('id', initialData.id);
+
+      if (error) throw error;
+      setMessage({ type: 'success', text: t('successDelete') });
+      
+      setTimeout(() => {
+        navigateTo('listings');
+      }, 2000);
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      setMessage({ type: 'error', text: t('errorDelete') });
     } finally {
       setLoading(false);
     }
@@ -225,13 +251,33 @@ export default function IndividualForm() {
               />
             </div>
 
-            <button
-              type="submit"
-              disabled={loading || formData.roles.length === 0}
-              className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-300 text-white font-medium py-3 rounded-lg transition-colors"
-            >
-              {loading ? '...' : isEditMode ? t('updateButton') : t('submitButton')}
-            </button>
+            <div className="flex flex-col gap-3">
+              <button
+                type="submit"
+                disabled={loading || formData.roles.length === 0}
+                className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-300 text-white font-medium py-3 rounded-lg transition-colors"
+              >
+                {loading ? (
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>
+                ) : isEditMode ? (
+                  t('updateButton')
+                ) : (
+                  t('submitButton')
+                )}
+              </button>
+
+              {isEditMode && (
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  disabled={loading}
+                  className="w-full bg-white border border-red-200 text-red-600 hover:bg-red-50 font-medium py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  {t('deleteButton')}
+                </button>
+              )}
+            </div>
           </form>
         </div>
       </div>

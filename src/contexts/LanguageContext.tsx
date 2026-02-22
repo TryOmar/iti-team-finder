@@ -17,7 +17,7 @@ const translations = {
     heroDescription: 'Connect with talented ITI students to form your dream graduation project team. Find teammates with the right skills or join an existing team looking for members.',
     joinTeamButton: 'Join a Team',
     findMembersButton: 'Find Members',
-    editPostButton: 'Edit My Post',
+    editPostButton: 'Edit/Delete My Posts',
     viewListings: 'View All Listings',
 
     individualFormTitle: 'Looking for a Team',
@@ -56,10 +56,13 @@ const translations = {
     submitButton: 'Submit',
     updateButton: 'Update',
     cancelButton: 'Cancel',
+    deleteButton: 'Delete Post',
+    confirmDelete: 'Are you sure you want to delete this post? This action cannot be undone.',
     backButton: 'Back',
 
     individualsTab: 'Individuals',
     teamsTab: 'Teams',
+    allTab: 'All',
 
     filterByTrack: 'Filter by Track',
     filterByRole: 'Filter by Role',
@@ -70,10 +73,13 @@ const translations = {
     membersCount: 'members',
     needsMembers: 'Needs',
 
-    editPostTitle: 'Edit My Post',
-    enterPhoneToEdit: 'Enter your phone number to edit your post',
-    findPost: 'Find Post',
-    noPostFound: 'No post found with this phone number',
+    editPostTitle: 'Manage My Posts',
+    enterPhoneToEdit: 'Enter your phone number to manage your posts',
+    findPost: 'Find Posts',
+    noPostFound: 'No posts found with this phone number',
+    selectPostToEdit: 'Select a post to edit or delete',
+    individualPost: 'Individual Profile',
+    teamPost: 'Team Profile',
 
     required: 'Required',
     optional: 'Optional',
@@ -81,8 +87,10 @@ const translations = {
     successIndividual: 'Your post has been submitted successfully!',
     successTeam: 'Your team post has been submitted successfully!',
     successUpdate: 'Your post has been updated successfully!',
+    successDelete: 'Your post has been deleted successfully!',
     errorSubmit: 'Failed to submit. Please try again.',
     errorUpdate: 'Failed to update. Please try again.',
+    errorDelete: 'Failed to delete. Please try again.',
 
     phonePlaceholder: '+20 xxx xxx xxxx',
     skillsPlaceholder: 'e.g., React, Node.js, MongoDB',
@@ -95,7 +103,7 @@ const translations = {
     heroDescription: 'تواصل مع طلاب ITI الموهوبين لتكوين فريق مشروع التخرج المثالي. ابحث عن زملاء بالمهارات المناسبة أو انضم لفريق موجود يبحث عن أعضاء.',
     joinTeamButton: 'الانضمام لفريق',
     findMembersButton: 'البحث عن أعضاء',
-    editPostButton: 'تعديل منشوري',
+    editPostButton: 'تعديل/حذف منشوراتي',
     viewListings: 'عرض جميع الإعلانات',
 
     individualFormTitle: 'أبحث عن فريق',
@@ -134,10 +142,13 @@ const translations = {
     submitButton: 'إرسال',
     updateButton: 'تحديث',
     cancelButton: 'إلغاء',
+    deleteButton: 'حذف المنشور',
+    confirmDelete: 'هل أنت متأكد من حذف هذا المنشور؟ لا يمكن التراجع عن هذا الإجراء.',
     backButton: 'رجوع',
 
     individualsTab: 'الأفراد',
     teamsTab: 'الفرق',
+    allTab: 'الكل',
 
     filterByTrack: 'تصفية بالمسار',
     filterByRole: 'تصفية بالدور',
@@ -148,10 +159,13 @@ const translations = {
     membersCount: 'أعضاء',
     needsMembers: 'يحتاج',
 
-    editPostTitle: 'تعديل منشوري',
-    enterPhoneToEdit: 'أدخل رقم هاتفك لتعديل منشورك',
-    findPost: 'البحث عن المنشور',
-    noPostFound: 'لم يتم العثور على منشور بهذا الرقم',
+    editPostTitle: 'إدارة منشوراتي',
+    enterPhoneToEdit: 'أدخل رقم هاتفك لإدارة منشوراتك',
+    findPost: 'البحث عن المنشورات',
+    noPostFound: 'لم يتم العثور على منشورات بهذا الرقم',
+    selectPostToEdit: 'اختر منشوراً لتعديله أو حذفه',
+    individualPost: 'ملف شخصي',
+    teamPost: 'ملف فريق',
 
     required: 'مطلوب',
     optional: 'اختياري',
@@ -159,8 +173,10 @@ const translations = {
     successIndividual: 'تم إرسال منشورك بنجاح!',
     successTeam: 'تم إرسال منشور فريقك بنجاح!',
     successUpdate: 'تم تحديث منشورك بنجاح!',
+    successDelete: 'تم حذف منشورك بنجاح!',
     errorSubmit: 'فشل الإرسال. حاول مرة أخرى.',
     errorUpdate: 'فشل التحديث. حاول مرة أخرى.',
+    errorDelete: 'فشل الحذف. حاول مرة أخرى.',
 
     phonePlaceholder: '+20 xxx xxx xxxx',
     skillsPlaceholder: 'مثال: React, Node.js, MongoDB',
