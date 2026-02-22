@@ -34,7 +34,7 @@ const translations = {
     currentSize: 'Current Team Size',
     membersNeeded: 'Members Needed',
     requiredRoles: 'Required Roles',
-    projectIdea: 'Project Idea',
+    projectIdea: 'General Notes',
     contactNumber: 'Contact Number',
 
     selectTrack: 'Select Track',
@@ -95,7 +95,7 @@ const translations = {
     phonePlaceholder: '+20 xxx xxx xxxx',
     skillsPlaceholder: 'e.g., React, Node.js, MongoDB',
     descriptionPlaceholder: 'Tell us about yourself, your interests, and what you bring to a team...',
-    projectIdeaPlaceholder: 'Describe your project idea (optional)...',
+    projectIdeaPlaceholder: 'Mention what you need, your current state, or any other notes (optional)...',
   },
   ar: {
     appTitle: 'مشروع تخرج ITI',
@@ -120,7 +120,7 @@ const translations = {
     currentSize: 'حجم الفريق الحالي',
     membersNeeded: 'الأعضاء المطلوبين',
     requiredRoles: 'الأدوار المطلوبة',
-    projectIdea: 'فكرة المشروع',
+    projectIdea: 'ملاحظات عامة',
     contactNumber: 'رقم التواصل',
 
     selectTrack: 'اختر المسار',
@@ -181,7 +181,7 @@ const translations = {
     phonePlaceholder: '+20 xxx xxx xxxx',
     skillsPlaceholder: 'مثال: React, Node.js, MongoDB',
     descriptionPlaceholder: 'أخبرنا عن نفسك واهتماماتك وما تقدمه للفريق...',
-    projectIdeaPlaceholder: 'اوصف فكرة مشروعك (اختياري)...',
+    projectIdeaPlaceholder: 'اذكر ما تحتاجه، وضعك الحالي، أو أي ملاحظات أخرى (اختياري)...',
   },
 };
 
