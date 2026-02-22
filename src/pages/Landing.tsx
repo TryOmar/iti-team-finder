@@ -12,12 +12,12 @@ export default function Landing() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Hero Section */}
         <div className="text-center mb-16 px-4">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-50 to-rose-50 rounded-3xl mb-6 shadow-sm">
-            <GraduationCap className="w-10 h-10 text-indigo-600" />
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-50 rounded-3xl mb-6 shadow-sm border border-blue-100/50">
+            <GraduationCap className="w-10 h-10 text-blue-600" />
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
             {t('appTitle')}{' '}
-            <span className="bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent">
+            <span className="text-blue-600">
               {t('appSubtitle')}
             </span>
           </h2>
@@ -94,16 +94,16 @@ interface ActionCardProps {
 function ActionCard({ icon, title, subtitle, variant, onClick }: ActionCardProps) {
   const styles = {
     indigo: {
-      border: 'border-indigo-100 hover:border-indigo-300',
-      iconBg: 'bg-indigo-50 group-hover:bg-indigo-100',
-      iconColor: 'text-indigo-600',
-      titleColor: 'text-indigo-700 group-hover:text-indigo-800',
+      border: 'border-blue-100 hover:border-blue-300',
+      iconBg: 'bg-blue-50 group-hover:bg-blue-100',
+      iconColor: 'text-blue-600',
+      titleColor: 'text-blue-700 group-hover:text-blue-800',
     },
     rose: {
-      border: 'border-rose-100 hover:border-rose-300',
-      iconBg: 'bg-rose-50 group-hover:bg-rose-100',
-      iconColor: 'text-rose-600',
-      titleColor: 'text-rose-700 group-hover:text-rose-800',
+      border: 'border-emerald-100 hover:border-emerald-300',
+      iconBg: 'bg-emerald-50 group-hover:bg-emerald-100',
+      iconColor: 'text-emerald-600',
+      titleColor: 'text-emerald-700 group-hover:text-emerald-800',
     },
   };
 
