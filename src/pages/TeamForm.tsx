@@ -39,7 +39,7 @@ export default function TeamForm() {
     setFormData(prev => ({
       ...prev,
       required_roles: prev.required_roles.includes(role)
-        ? prev.required_roles.filter(r => r !== role)
+        ? prev.required_roles.filter((r: string) => r !== role)
         : [...prev.required_roles, role],
     }));
   };

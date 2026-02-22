@@ -38,7 +38,7 @@ export default function IndividualForm() {
     setFormData(prev => ({
       ...prev,
       roles: prev.roles.includes(role)
-        ? prev.roles.filter(r => r !== role)
+        ? prev.roles.filter((r: string) => r !== role)
         : [...prev.roles, role],
     }));
   };
@@ -206,31 +206,17 @@ export default function IndividualForm() {
               </div>
             </div>
 
-            <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
-                <Code className="w-4 h-4" />
-                {t('skills')} <span className="text-gray-500 text-xs">({t('optional')})</span>
-              </label>
-              <input
-                type="text"
-                value={formData.skills}
-                onChange={e => setFormData({ ...formData, skills: e.target.value })}
-                placeholder={t('skillsPlaceholder')}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
-              />
-            </div>
 
             <div>
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                 <FileText className="w-4 h-4" />
-                {t('aboutYou')} <span className="text-red-600">*</span>
+                {t('projectIdea')} <span className="text-gray-500 text-xs">({t('optional')})</span>
               </label>
               <textarea
-                required
                 rows={4}
                 value={formData.description}
                 onChange={e => setFormData({ ...formData, description: e.target.value })}
-                placeholder={t('descriptionPlaceholder')}
+                placeholder={t('projectIdeaPlaceholder')}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
               />
             </div>
