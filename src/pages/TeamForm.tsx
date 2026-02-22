@@ -32,6 +32,7 @@ export default function TeamForm() {
     required_roles: initialData?.required_roles || [],
     project_idea: initialData?.project_idea || '',
     contact: initialData?.contact || '',
+    status: initialData?.status || 'open',
   });
 
   const [loading, setLoading] = useState(false);
@@ -52,6 +53,7 @@ export default function TeamForm() {
     setMessage(null);
 
     try {
+      const formattedPhone = formatPhoneNumber(formData.contact);
       if (isEditMode) {
         const { error } = await supabase
           .from('teams')
@@ -62,13 +64,14 @@ export default function TeamForm() {
             needed_members: formData.needed_members,
             required_roles: formData.required_roles,
             project_idea: formData.project_idea,
+            status: formData.status,
           })
           .eq('id', initialData.id);
 
         if (error) throw error;
+        localStorage.setItem('userPhone', formattedPhone);
         setMessage({ type: 'success', text: t('successUpdate') });
       } else {
-        const formattedPhone = formatPhoneNumber(formData.contact);
         const { error } = await supabase.from('teams').insert([
           {
             team_name: formData.team_name,
@@ -78,10 +81,12 @@ export default function TeamForm() {
             required_roles: formData.required_roles,
             project_idea: formData.project_idea,
             contact: formattedPhone,
+            status: formData.status,
           },
         ]);
 
         if (error) throw error;
+        localStorage.setItem('userPhone', formattedPhone);
         setMessage({ type: 'success', text: t('successTeam') });
       }
 
@@ -275,6 +280,23 @@ export default function TeamForm() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
             </div>
+
+            {isEditMode && (
+              <div>
+                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                  <Briefcase className="w-4 h-4" />
+                  Status
+                </label>
+                <select
+                  value={formData.status}
+                  onChange={e => setFormData({ ...formData, status: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                >
+                  <option value="open">Open (Looking for Members)</option>
+                  <option value="closed">Closed (Team Full)</option>
+                </select>
+              </div>
+            )}
 
             <div className="flex flex-col gap-3">
               <button

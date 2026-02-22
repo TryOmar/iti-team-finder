@@ -19,6 +19,7 @@ export interface Individual {
   phone: string;
   language: string;
   created_at: string;
+  status?: string;
 }
 
 export interface Team {
@@ -31,4 +32,5 @@ export interface Team {
   project_idea: string;
   contact: string;
   created_at: string;
+  status?: string;
 }

@@ -31,6 +31,7 @@ export default function IndividualForm() {
     skills: initialData?.skills || '',
     description: initialData?.description || '',
     phone: initialData?.phone || '',
+    status: initialData?.status || 'open',
   });
 
   const [loading, setLoading] = useState(false);
@@ -51,6 +52,7 @@ export default function IndividualForm() {
     setMessage(null);
 
     try {
+      const formattedPhone = formatPhoneNumber(formData.phone);
       if (isEditMode) {
         const { error } = await supabase
           .from('individuals')
@@ -60,13 +62,14 @@ export default function IndividualForm() {
             roles: formData.roles,
             skills: formData.skills,
             description: formData.description,
+            status: formData.status,
           })
           .eq('id', initialData.id);
 
         if (error) throw error;
+        localStorage.setItem('userPhone', formattedPhone);
         setMessage({ type: 'success', text: t('successUpdate') });
       } else {
-        const formattedPhone = formatPhoneNumber(formData.phone);
         const { error } = await supabase.from('individuals').insert([
           {
             name: formData.name,
@@ -76,10 +79,12 @@ export default function IndividualForm() {
             description: formData.description,
             phone: formattedPhone,
             language: t('language'),
+            status: formData.status,
           },
         ]);
 
         if (error) throw error;
+        localStorage.setItem('userPhone', formattedPhone);
         setMessage({ type: 'success', text: t('successIndividual') });
       }
 
@@ -239,6 +244,23 @@ export default function IndividualForm() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
             </div>
+
+            {isEditMode && (
+              <div>
+                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                  <Briefcase className="w-4 h-4" />
+                  Status
+                </label>
+                <select
+                  value={formData.status}
+                  onChange={e => setFormData({ ...formData, status: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                >
+                  <option value="open">Open (Looking for Team)</option>
+                  <option value="closed">Closed (Found Team)</option>
+                </select>
+              </div>
+            )}
 
             <div className="flex flex-col gap-3">
               <button
