@@ -4,7 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase, Individual, Team } from '../lib/supabase';
-import { formatPhoneNumber } from '../lib/phoneUtils';
+import { formatPhoneNumber, getPhoneVariations } from '../lib/phoneUtils';
 
 type SearchResult = 
   | { type: 'individual'; data: Individual }
@@ -27,10 +27,10 @@ export default function EditPost() {
     setHasSearched(false);
 
     try {
-      const formattedPhone = formatPhoneNumber(searchPhone);
+      const variations = getPhoneVariations(searchPhone);
       const [individualRes, teamRes] = await Promise.all([
-        supabase.from('individuals').select('*').in('phone', [searchPhone, formattedPhone]),
-        supabase.from('teams').select('*').in('contact', [searchPhone, formattedPhone]),
+        supabase.from('individuals').select('*').in('phone', variations),
+        supabase.from('teams').select('*').in('contact', variations),
       ]);
 
       const foundResults: SearchResult[] = [
@@ -42,7 +42,7 @@ export default function EditPost() {
       setHasSearched(true);
 
       if (foundResults.length > 0) {
-        login(formattedPhone);
+        login(formatPhoneNumber(searchPhone));
       }
 
       if (foundResults.length === 0) {
@@ -112,10 +112,22 @@ export default function EditPost() {
                     required
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
+                    onBlur={() => {
+                      if (phone) {
+                        setPhone(formatPhoneNumber(phone));
+                      }
+                    }}
                     placeholder={t('phonePlaceholder')}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
                   />
+                  {phone && phone !== formatPhoneNumber(phone) && (
+                    <p className="mt-1 text-xs text-gray-500 italic">
+                      {t('searchingAs')}: 
+                      <span className="font-mono font-medium text-red-600 ml-1">{formatPhoneNumber(phone)}</span>
+                    </p>
+                  )}
                 </div>
+
 
                 <button
                   type="submit"

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { formatPhoneNumber } from '../lib/phoneUtils';
 
 interface AuthContextType {
   userPhone: string | null;
@@ -12,14 +13,15 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [userPhone, setUserPhone] = useState<string | null>(() => {
     const saved = localStorage.getItem('userPhone');
-    return saved ? saved.replace(/\s/g, '') : null;
+    return saved ? formatPhoneNumber(saved) : null;
   });
 
   const login = (phone: string) => {
-    const cleanPhone = phone.replace(/\s/g, '');
-    localStorage.setItem('userPhone', cleanPhone);
-    setUserPhone(cleanPhone);
+    const formattedPhone = formatPhoneNumber(phone);
+    localStorage.setItem('userPhone', formattedPhone);
+    setUserPhone(formattedPhone);
   };
+
 
   const logout = () => {
     localStorage.removeItem('userPhone');

@@ -39,15 +39,22 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
               Closed
             </span>
           )}
+          {isMyPost && (
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-red-600 text-white rounded-full text-[10px] font-bold uppercase tracking-wider w-fit shadow-sm">
+              <Settings className="w-3 h-3" />
+              {t('language') === 'ar' ? 'منشورك' : 'Your Post'}
+            </span>
+          )}
         </div>
         <div className="flex items-center gap-2">
           {isMyPost && (
             <button
               onClick={handleEdit}
-              className="bg-gray-100 hover:bg-gray-200 text-gray-600 w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
-              title="Edit Post"
+              className="flex items-center gap-2 px-3 py-2 bg-red-100 text-red-700 hover:bg-red-200 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 border border-red-200"
+              title={t('editPostButton')}
             >
-              <Settings className="w-5 h-5" />
+              <Settings className="w-4 h-4" />
+              <span className="text-xs font-bold">{t('language') === 'ar' ? 'تعديل' : 'Edit'}</span>
             </button>
           )}
           <a

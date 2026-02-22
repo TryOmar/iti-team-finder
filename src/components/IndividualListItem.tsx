@@ -43,6 +43,11 @@ export default function IndividualListItem({ individual }: IndividualListItemPro
                   Closed
                 </span>
               )}
+              {isMyPost && (
+                <span className="text-[10px] font-bold text-white bg-red-600 px-2 py-0.5 rounded-md uppercase tracking-wider shadow-sm">
+                  {t('language') === 'ar' ? 'منشورك' : 'Your Post'}
+                </span>
+              )}
               <span className="text-xs font-semibold text-gray-500 flex items-center gap-1">
                 <Briefcase className="w-3 h-3" />
                 {t(`track${individual.track.replace('-', '')}`)}
@@ -84,10 +89,11 @@ export default function IndividualListItem({ individual }: IndividualListItemPro
         {isMyPost && (
           <button
             onClick={handleEdit}
-            className="bg-gray-100 hover:bg-gray-200 text-gray-600 w-10 h-10 flex items-center justify-center rounded-lg transition-all duration-200 border border-gray-100"
-            title="Edit Post"
+            className="flex items-center gap-2 px-3 py-2 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg transition-all duration-200 border border-red-200 shadow-sm"
+            title={t('editPostButton')}
           >
             <Settings className="w-4 h-4" />
+            <span className="text-xs font-bold">{t('language') === 'ar' ? 'تعديل' : 'Edit'}</span>
           </button>
         )}
         <a

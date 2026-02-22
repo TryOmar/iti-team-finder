@@ -245,6 +245,12 @@ export default function IndividualForm() {
                 disabled={isEditMode}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
+              {!isEditMode && formData.phone && formData.phone !== formatPhoneNumber(formData.phone) && (
+                <p className="mt-1 text-xs text-gray-500 italic">
+                  {t('searchingAs')}: 
+                  <span className="font-mono font-medium text-red-600 ml-1">{formatPhoneNumber(formData.phone)}</span>
+                </p>
+              )}
             </div>
 
             {isEditMode && (
