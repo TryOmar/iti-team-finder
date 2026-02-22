@@ -162,6 +162,7 @@ export default function TeamForm() {
                 required
                 value={formData.team_name}
                 onChange={e => setFormData({ ...formData, team_name: e.target.value })}
+                placeholder={t('teamNamePlaceholder')}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
               />
             </div>

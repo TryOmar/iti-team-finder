@@ -29,7 +29,8 @@ const translations = {
     aboutYou: 'About You',
     phone: 'Phone/WhatsApp',
 
-    teamName: 'Team Name',
+    teamName: 'Current Members Names',
+    teamNamePlaceholder: 'e.g., Mohamed, Omar...',
     currentSize: 'Current Team Size',
     membersNeeded: 'Members Needed',
     requiredRoles: 'Required Roles',
@@ -115,7 +116,8 @@ const translations = {
     aboutYou: 'عن نفسك',
     phone: 'الهاتف/واتساب',
 
-    teamName: 'اسم الفريق',
+    teamName: 'أسماء أعضاء الفريق',
+    teamNamePlaceholder: 'مثال: محمد، عمر...',
     currentSize: 'حجم الفريق الحالي',
     membersNeeded: 'الأعضاء المطلوبين',
     requiredRoles: 'الأدوار المطلوبة',
