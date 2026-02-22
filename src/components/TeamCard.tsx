@@ -2,6 +2,7 @@ import { Briefcase, Code, Hash, Phone, Users, Settings } from 'lucide-react';
 import { Team } from '../lib/supabase';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
+import { useAuth } from '../contexts/AuthContext';
 import WhatsAppIcon from './WhatsAppIcon';
 
 interface TeamCardProps {
@@ -11,9 +12,9 @@ interface TeamCardProps {
 export default function TeamCard({ team }: TeamCardProps) {
   const { t } = useLanguage();
   const { navigateTo, setEditData } = useNavigation();
+  const { userPhone } = useAuth();
 
   const whatsappLink = buildWhatsAppLink(team.contact);
-  const userPhone = localStorage.getItem('userPhone');
   const isMyPost = userPhone && userPhone === team.contact;
 
   const handleEdit = () => {

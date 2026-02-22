@@ -2,6 +2,7 @@ import { Briefcase, User, Settings } from 'lucide-react';
 import { Individual } from '../lib/supabase';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
+import { useAuth } from '../contexts/AuthContext';
 import WhatsAppIcon from './WhatsAppIcon';
 
 interface IndividualListItemProps {
@@ -11,9 +12,9 @@ interface IndividualListItemProps {
 export default function IndividualListItem({ individual }: IndividualListItemProps) {
   const { t } = useLanguage();
   const { navigateTo, setEditData } = useNavigation();
+  const { userPhone } = useAuth();
 
   const whatsappLink = buildWhatsAppLink(individual.phone);
-  const userPhone = localStorage.getItem('userPhone');
   const isMyPost = userPhone && userPhone === individual.phone;
 
   const handleEdit = () => {

@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react';
 import { ArrowLeft, Users, Phone, Briefcase, Code, FileText, Hash, Trash2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
+import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import { formatPhoneNumber } from '../lib/phoneUtils';
 
@@ -20,6 +21,7 @@ const roles = [
 export default function TeamForm() {
   const { t } = useLanguage();
   const { navigateTo, editData } = useNavigation();
+  const { login } = useAuth();
 
   const isEditMode = editData?.type === 'team';
   const initialData = isEditMode ? editData.data : null;
@@ -69,7 +71,7 @@ export default function TeamForm() {
           .eq('id', initialData.id);
 
         if (error) throw error;
-        localStorage.setItem('userPhone', formattedPhone);
+        login(formattedPhone);
         setMessage({ type: 'success', text: t('successUpdate') });
       } else {
         const { error } = await supabase.from('teams').insert([
@@ -86,7 +88,7 @@ export default function TeamForm() {
         ]);
 
         if (error) throw error;
-        localStorage.setItem('userPhone', formattedPhone);
+        login(formattedPhone);
         setMessage({ type: 'success', text: t('successTeam') });
       }
 

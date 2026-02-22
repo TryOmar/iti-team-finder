@@ -1,7 +1,8 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect, useCallback } from 'react';
 import { ArrowLeft, Settings, Phone, Search, User, Users, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
+import { useAuth } from '../contexts/AuthContext';
 import { supabase, Individual, Team } from '../lib/supabase';
 import { formatPhoneNumber } from '../lib/phoneUtils';
 
@@ -12,24 +13,24 @@ type SearchResult =
 export default function EditPost() {
   const { t } = useLanguage();
   const { navigateTo, setEditData } = useNavigation();
-  const [phone, setPhone] = useState(localStorage.getItem('userPhone') || '');
+  const { userPhone, login } = useAuth();
+  const [phone, setPhone] = useState(userPhone || '');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
   const [message, setMessage] = useState<{ type: 'error'; text: string } | null>(null);
 
-  const handleSearch = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSearch = useCallback(async (searchPhone: string) => {
     setLoading(true);
     setMessage(null);
     setResults([]);
     setHasSearched(false);
 
     try {
-      const formattedPhone = formatPhoneNumber(phone);
+      const formattedPhone = formatPhoneNumber(searchPhone);
       const [individualRes, teamRes] = await Promise.all([
-        supabase.from('individuals').select('*').in('phone', [phone, formattedPhone]),
-        supabase.from('teams').select('*').in('contact', [phone, formattedPhone]),
+        supabase.from('individuals').select('*').in('phone', [searchPhone, formattedPhone]),
+        supabase.from('teams').select('*').in('contact', [searchPhone, formattedPhone]),
       ]);
 
       const foundResults: SearchResult[] = [
@@ -39,6 +40,10 @@ export default function EditPost() {
 
       setResults(foundResults);
       setHasSearched(true);
+
+      if (foundResults.length > 0) {
+        login(formattedPhone);
+      }
 
       if (foundResults.length === 0) {
         setMessage({ type: 'error', text: t('noPostFound') });
@@ -53,6 +58,17 @@ export default function EditPost() {
     } finally {
       setLoading(false);
     }
+  }, [login, navigateTo, setEditData, t]);
+
+  useEffect(() => {
+    if (userPhone && !hasSearched) {
+      handleSearch(userPhone);
+    }
+  }, [userPhone, hasSearched, handleSearch]);
+
+  const onSearchSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    handleSearch(phone);
   };
 
   const handleSelect = (result: SearchResult) => {
@@ -89,7 +105,7 @@ export default function EditPost() {
                 </div>
               )}
 
-              <form onSubmit={handleSearch} className="space-y-6">
+              <form onSubmit={onSearchSubmit} className="space-y-6">
                 <div>
                   <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                     <Phone className="w-4 h-4" />

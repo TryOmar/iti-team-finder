@@ -1,5 +1,6 @@
 import { LanguageProvider } from './contexts/LanguageContext';
 import { NavigationProvider, useNavigation } from './contexts/NavigationContext';
+import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/Header';
 import Landing from './pages/Landing';
 import IndividualForm from './pages/IndividualForm';
@@ -23,9 +24,11 @@ function AppContent() {
 function App() {
   return (
     <LanguageProvider>
-      <NavigationProvider>
-        <AppContent />
-      </NavigationProvider>
+      <AuthProvider>
+        <NavigationProvider>
+          <AppContent />
+        </NavigationProvider>
+      </AuthProvider>
     </LanguageProvider>
   );
 }

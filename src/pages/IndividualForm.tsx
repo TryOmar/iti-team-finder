@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react';
 import { ArrowLeft, UserPlus, Phone, Briefcase, Code, FileText, Trash2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
+import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import { formatPhoneNumber } from '../lib/phoneUtils';
 
@@ -20,6 +21,7 @@ const roles = [
 export default function IndividualForm() {
   const { t } = useLanguage();
   const { navigateTo, editData } = useNavigation();
+  const { login } = useAuth();
 
   const isEditMode = editData?.type === 'individual';
   const initialData = isEditMode ? editData.data : null;
@@ -67,7 +69,7 @@ export default function IndividualForm() {
           .eq('id', initialData.id);
 
         if (error) throw error;
-        localStorage.setItem('userPhone', formattedPhone);
+        login(formattedPhone);
         setMessage({ type: 'success', text: t('successUpdate') });
       } else {
         const { error } = await supabase.from('individuals').insert([
@@ -84,7 +86,7 @@ export default function IndividualForm() {
         ]);
 
         if (error) throw error;
-        localStorage.setItem('userPhone', formattedPhone);
+        login(formattedPhone);
         setMessage({ type: 'success', text: t('successIndividual') });
       }
 

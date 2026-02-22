@@ -2,6 +2,7 @@ import { Briefcase, Users, Hash, Settings } from 'lucide-react';
 import { Team } from '../lib/supabase';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
+import { useAuth } from '../contexts/AuthContext';
 import WhatsAppIcon from './WhatsAppIcon';
 
 interface TeamListItemProps {
@@ -11,9 +12,9 @@ interface TeamListItemProps {
 export default function TeamListItem({ team }: TeamListItemProps) {
   const { t } = useLanguage();
   const { navigateTo, setEditData } = useNavigation();
+  const { userPhone } = useAuth();
 
   const whatsappLink = buildWhatsAppLink(team.contact);
-  const userPhone = localStorage.getItem('userPhone');
   const isMyPost = userPhone && userPhone === team.contact;
 
   const handleEdit = () => {

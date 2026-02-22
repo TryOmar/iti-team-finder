@@ -95,6 +95,9 @@ const translations = {
     errorUpdate: 'Failed to update. Please try again.',
     errorDelete: 'Failed to delete. Please try again.',
 
+    logout: 'Logout',
+    loggedInAs: 'Logged in as',
+
     phonePlaceholder: '+20 xxx xxx xxxx',
     skillsPlaceholder: 'e.g., React, Node.js, MongoDB',
     descriptionPlaceholder: 'Tell us about yourself, your interests, and what you bring to a team...',
@@ -183,6 +186,9 @@ const translations = {
     errorSubmit: 'فشل الإرسال. حاول مرة أخرى.',
     errorUpdate: 'فشل التحديث. حاول مرة أخرى.',
     errorDelete: 'فشل الحذف. حاول مرة أخرى.',
+
+    logout: 'تسجيل الخروج',
+    loggedInAs: 'مسجل دخول بـ',
 
     phonePlaceholder: '+20 xxx xxx xxxx',
     skillsPlaceholder: 'مثال: React, Node.js, MongoDB',
