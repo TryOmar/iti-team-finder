@@ -14,7 +14,6 @@ const translations = {
   en: {
     appTitle: 'ITI Graduation Project',
     appSubtitle: 'Teammate Finder',
-    heroDescription: 'Connect with talented ITI students to form your dream graduation project team. Find teammates with the right skills or join an existing team looking for members.',
     joinTeamButton: 'Join a Team',
     findMembersButton: 'Find Members',
     editPostButton: 'Edit/Delete My Posts',
@@ -100,7 +99,6 @@ const translations = {
   ar: {
     appTitle: 'مشروع تخرج ITI',
     appSubtitle: 'البحث عن زملاء الفريق',
-    heroDescription: 'تواصل مع طلاب ITI الموهوبين لتكوين فريق مشروع التخرج المثالي. ابحث عن زملاء بالمهارات المناسبة أو انضم لفريق موجود يبحث عن أعضاء.',
     joinTeamButton: 'الانضمام لفريق',
     findMembersButton: 'البحث عن أعضاء',
     editPostButton: 'تعديل/حذف منشوراتي',
