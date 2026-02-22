@@ -1,6 +1,7 @@
-import { Briefcase, Code, Phone, User } from 'lucide-react';
+import { Briefcase, Code, Phone, User, Settings } from 'lucide-react';
 import { Individual } from '../lib/supabase';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useNavigation } from '../contexts/NavigationContext';
 import WhatsAppIcon from './WhatsAppIcon';
 
 interface IndividualCardProps {
@@ -9,29 +10,55 @@ interface IndividualCardProps {
 
 export default function IndividualCard({ individual }: IndividualCardProps) {
   const { t } = useLanguage();
+  const { navigateTo, setEditData } = useNavigation();
 
   const whatsappLink = buildWhatsAppLink(individual.phone);
+  const userPhone = localStorage.getItem('userPhone');
+  const isMyPost = userPhone && userPhone === individual.phone;
+
+  const handleEdit = () => {
+    setEditData({ type: 'individual', data: individual });
+    navigateTo('individual-form');
+  };
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl hover:shadow-blue-50 transition-all duration-300 relative overflow-hidden group flex flex-col h-full">
+    <div className={`bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl hover:shadow-blue-50 transition-all duration-300 relative overflow-hidden group flex flex-col h-full ${individual.status === 'closed' ? 'opacity-75' : ''}`}>
       {/* Decorative gradient blob */}
       <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-50/60 rounded-full blur-3xl group-hover:bg-blue-100/60 transition-colors duration-500 pointer-events-none" />
 
       {/* Header: badge + WhatsApp */}
       <div className="flex justify-between items-start mb-5 relative z-10">
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase tracking-wider">
-          <User className="w-3 h-3" />
-          {t('individualPost')}
-        </span>
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-[#25D366] hover:bg-[#128C7E] w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
-          title={t('contactViaWhatsApp')}
-        >
-          <WhatsAppIcon className="w-5 h-5 text-white" />
-        </a>
+        <div className="flex flex-col gap-2">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit">
+            <User className="w-3 h-3" />
+            {t('individualPost')}
+          </span>
+          {individual.status === 'closed' && (
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-red-50 text-red-600 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit">
+              Closed
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          {isMyPost && (
+            <button
+              onClick={handleEdit}
+              className="bg-gray-100 hover:bg-gray-200 text-gray-600 w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+              title="Edit Post"
+            >
+              <Settings className="w-5 h-5" />
+            </button>
+          )}
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#25D366] hover:bg-[#128C7E] w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+            title={t('contactViaWhatsApp')}
+          >
+            <WhatsAppIcon className="w-5 h-5 text-white" />
+          </a>
+        </div>
       </div>
 
       {/* Name + Track */}

@@ -12,7 +12,7 @@ type SearchResult =
 export default function EditPost() {
   const { t } = useLanguage();
   const { navigateTo, setEditData } = useNavigation();
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState(localStorage.getItem('userPhone') || '');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [hasSearched, setHasSearched] = useState(false);

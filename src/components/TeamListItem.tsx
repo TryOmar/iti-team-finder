@@ -1,6 +1,7 @@
-import { Briefcase, Users, Hash } from 'lucide-react';
+import { Briefcase, Users, Hash, Settings } from 'lucide-react';
 import { Team } from '../lib/supabase';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useNavigation } from '../contexts/NavigationContext';
 import WhatsAppIcon from './WhatsAppIcon';
 
 interface TeamListItemProps {
@@ -9,10 +10,19 @@ interface TeamListItemProps {
 
 export default function TeamListItem({ team }: TeamListItemProps) {
   const { t } = useLanguage();
+  const { navigateTo, setEditData } = useNavigation();
+
   const whatsappLink = buildWhatsAppLink(team.contact);
+  const userPhone = localStorage.getItem('userPhone');
+  const isMyPost = userPhone && userPhone === team.contact;
+
+  const handleEdit = () => {
+    setEditData({ type: 'team', data: team });
+    navigateTo('team-form');
+  };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md hover:shadow-emerald-50 transition-all duration-300 group flex flex-col sm:flex-row items-start sm:items-center gap-4">
+    <div className={`bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md hover:shadow-emerald-50 transition-all duration-300 group flex flex-col sm:flex-row items-start sm:items-center gap-4 ${team.status === 'closed' ? 'opacity-75' : ''}`}>
       <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-4 min-w-0 w-full">
         {/* Type & Name */}
         <div className="flex items-center gap-3 min-w-0 w-full sm:w-auto shrink-0 sm:min-w-[200px]">
@@ -23,10 +33,15 @@ export default function TeamListItem({ team }: TeamListItemProps) {
             <h3 className="text-base font-bold text-gray-900 truncate group-hover:text-emerald-600 transition-colors">
               {team.team_name}
             </h3>
-            <div className="flex items-center gap-2 mt-0.5">
+            <div className="flex items-center gap-2 mt-0.5 flex-wrap">
               <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50/80 px-2 py-0.5 rounded-md uppercase tracking-wider">
                 {t('teamPost')}
               </span>
+              {team.status === 'closed' && (
+                <span className="text-[10px] font-bold text-red-600 bg-red-50/80 px-2 py-0.5 rounded-md uppercase tracking-wider">
+                  Closed
+                </span>
+              )}
               <span className="text-xs font-semibold text-gray-500 flex items-center gap-1">
                 <Briefcase className="w-3 h-3" />
                 {t(`track${team.track.replace('-', '')}`)}
@@ -71,6 +86,15 @@ export default function TeamListItem({ team }: TeamListItemProps) {
         <span className="text-xs text-gray-400 hidden sm:block">
           {new Date(team.created_at).toLocaleDateString()}
         </span>
+        {isMyPost && (
+          <button
+            onClick={handleEdit}
+            className="bg-gray-100 hover:bg-gray-200 text-gray-600 w-10 h-10 flex items-center justify-center rounded-lg transition-all duration-200 border border-gray-100"
+            title="Edit Post"
+          >
+            <Settings className="w-4 h-4" />
+          </button>
+        )}
         <a
           href={whatsappLink}
           target="_blank"
