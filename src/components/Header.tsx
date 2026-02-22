@@ -1,4 +1,4 @@
-import { GraduationCap, Languages } from 'lucide-react';
+import { GraduationCap, Languages, Github } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
 
@@ -23,13 +23,25 @@ export default function Header() {
             </div>
           </button>
 
-          <button
-            onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
-            className="flex items-center gap-2 px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-xl transition-colors text-sm font-medium text-gray-600"
-          >
-            <Languages className="w-4 h-4" />
-            <span>{language === 'en' ? 'العربية' : 'English'}</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <a
+              href="https://github.com/TryOmar/iti-team-finder"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-xl transition-colors text-sm font-medium text-gray-600"
+              title={language === 'en' ? "Open source project. Feel free to contribute or add suggestions in issues!" : "مشروع مفتوح المصدر. نرحب بمساهماتكم واقتراحاتكم!"}
+            >
+              <Github className="w-4 h-4" />
+              <span className="hidden sm:inline">{language === 'en' ? 'Contribute' : 'ساهم معنا'}</span>
+            </a>
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
+              className="flex items-center gap-2 px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-xl transition-colors text-sm font-medium text-gray-600"
+            >
+              <Languages className="w-4 h-4" />
+              <span>{language === 'en' ? 'العربية' : 'English'}</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>
