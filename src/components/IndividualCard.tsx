@@ -24,7 +24,7 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
   };
 
   return (
-    <div className={`bg-white rounded-2xl border ${isMyPost ? 'border-red-200 shadow-lg shadow-red-50/50' : 'border-gray-100'} p-6 hover:shadow-xl hover:shadow-blue-50 transition-all duration-300 relative overflow-hidden group flex flex-col h-full ${individual.status === 'closed' ? 'opacity-60 grayscale-[0.6] saturate-50' : ''}`}>
+    <div className={`bg-white rounded-2xl border ${isMyPost ? 'border-red-200 shadow-lg shadow-red-50/50' : 'border-gray-100'} p-6 hover:shadow-xl hover:shadow-blue-50 transition-all duration-300 relative overflow-hidden group flex flex-col h-full ${individual.status === 'closed' ? 'opacity-50 grayscale saturate-0' : ''}`}>
       {/* Decorative gradient blob */}
       <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-50/60 rounded-full blur-3xl group-hover:bg-blue-100/60 transition-colors duration-500 pointer-events-none" />
 
@@ -131,16 +131,15 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
           <Phone className="w-3.5 h-3.5" />
           <span>{individual.phone}</span>
         </a>
-        <div className="flex flex-col items-end gap-1">
-          {individual.status === 'closed' && (
-            <span className="text-[9px] font-black text-red-500 uppercase tracking-[0.2em] bg-red-50 px-2 py-0.5 rounded border border-red-100 flex items-center gap-1.5">
-              <div className="w-1 h-1 rounded-full bg-red-500 animate-pulse" />
-              Closed
-            </span>
-          )}
+        <div className="flex items-center gap-2">
           <span className="text-[10px] text-gray-400 font-medium">
             {new Date(individual.created_at).toLocaleDateString()}
           </span>
+          {individual.status === 'closed' && (
+            <span className="text-[9px] font-black text-gray-500 uppercase tracking-[0.2em] bg-gray-100 px-2 py-0.5 rounded border border-gray-200 flex items-center gap-1">
+              Closed
+            </span>
+          )}
         </div>
       </div>
     </div>
