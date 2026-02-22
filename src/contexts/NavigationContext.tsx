@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-type Page = 'landing' | 'individual-form' | 'team-form' | 'listings' | 'edit';
+type Page = 'landing' | 'individual-form' | 'team-form' | 'edit';
 
 interface NavigationContextType {
   currentPage: Page;

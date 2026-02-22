@@ -107,13 +107,13 @@ export default function ListingsGrid({ limit, showFilters = false }: ListingsGri
                 active={activeTab === 'individuals'}
                 label={t('individualsTab')}
                 onClick={() => setActiveTab('individuals')}
-                variant="indigo"
+                variant="blue"
               />
               <TabButton
                 active={activeTab === 'teams'}
                 label={t('teamsTab')}
                 onClick={() => setActiveTab('teams')}
-                variant="rose"
+                variant="emerald"
               />
             </div>
 
@@ -139,7 +139,7 @@ export default function ListingsGrid({ limit, showFilters = false }: ListingsGri
                 <select
                   value={trackFilter}
                   onChange={e => setTrackFilter(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all appearance-none cursor-pointer hover:border-gray-300"
+                  className="w-full pl-9 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-all appearance-none cursor-pointer hover:border-gray-300"
                 >
                   <option value="">{t('allTracks')}</option>
                   {TRACKS.map(track => (
@@ -156,7 +156,7 @@ export default function ListingsGrid({ limit, showFilters = false }: ListingsGri
                 <select
                   value={roleFilter}
                   onChange={e => setRoleFilter(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all appearance-none cursor-pointer hover:border-gray-300"
+                  className="w-full pl-9 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-all appearance-none cursor-pointer hover:border-gray-300"
                 >
                   <option value="">{t('allRoles')}</option>
                   {ROLES.map(role => (
@@ -183,7 +183,7 @@ export default function ListingsGrid({ limit, showFilters = false }: ListingsGri
       {loading ? (
         <div className="text-center py-16">
           <div className="inline-flex items-center gap-3">
-            <div className="w-8 h-8 border-[3px] border-gray-200 border-t-indigo-500 rounded-full animate-spin" />
+            <div className="w-8 h-8 border-[3px] border-gray-200 border-t-blue-500 rounded-full animate-spin" />
             <span className="text-sm text-gray-400 font-medium">
               {t('language') === 'ar' ? 'جاري التحميل...' : 'Loading...'}
             </span>
@@ -201,7 +201,7 @@ export default function ListingsGrid({ limit, showFilters = false }: ListingsGri
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="text-sm text-indigo-500 hover:text-indigo-700 font-medium transition-colors"
+                className="text-sm text-blue-500 hover:text-blue-700 font-medium transition-colors"
               >
                 {t('language') === 'ar' ? 'مسح الفلاتر' : 'Clear filters'}
               </button>
@@ -228,14 +228,14 @@ interface TabButtonProps {
   active: boolean;
   label: string;
   onClick: () => void;
-  variant: 'neutral' | 'indigo' | 'rose';
+  variant: 'neutral' | 'blue' | 'emerald';
 }
 
 function TabButton({ active, label, onClick, variant }: TabButtonProps) {
   const activeStyles: Record<string, string> = {
     neutral: 'bg-white text-gray-900 shadow-sm ring-1 ring-black/5',
-    indigo: 'bg-indigo-600 text-white shadow-md shadow-indigo-200',
-    rose: 'bg-rose-600 text-white shadow-md shadow-rose-200',
+    blue: 'bg-blue-600 text-white shadow-md shadow-blue-200',
+    emerald: 'bg-emerald-600 text-white shadow-md shadow-emerald-200',
   };
 
   const inactiveStyle = 'text-gray-500 hover:text-gray-700 hover:bg-gray-50';

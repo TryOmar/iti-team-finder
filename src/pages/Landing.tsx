@@ -36,7 +36,7 @@ export default function Landing() {
                 ? 'سجل كفرد يبحث عن فريق'
                 : 'Register as an individual looking for a team'
             }
-            variant="indigo"
+            variant="blue"
             onClick={() => navigateTo('individual-form')}
           />
           <ActionCard
@@ -47,7 +47,7 @@ export default function Landing() {
                 ? 'سجل فريقك للبحث عن أعضاء'
                 : 'Register your team to find members'
             }
-            variant="rose"
+            variant="emerald"
             onClick={() => navigateTo('team-form')}
           />
         </div>
@@ -87,19 +87,19 @@ interface ActionCardProps {
   icon: React.ReactNode;
   title: string;
   subtitle: string;
-  variant: 'indigo' | 'rose';
+  variant: 'blue' | 'emerald';
   onClick: () => void;
 }
 
 function ActionCard({ icon, title, subtitle, variant, onClick }: ActionCardProps) {
   const styles = {
-    indigo: {
+    blue: {
       border: 'border-blue-100 hover:border-blue-300',
       iconBg: 'bg-blue-50 group-hover:bg-blue-100',
       iconColor: 'text-blue-600',
       titleColor: 'text-blue-700 group-hover:text-blue-800',
     },
-    rose: {
+    emerald: {
       border: 'border-emerald-100 hover:border-emerald-300',
       iconBg: 'bg-emerald-50 group-hover:bg-emerald-100',
       iconColor: 'text-emerald-600',

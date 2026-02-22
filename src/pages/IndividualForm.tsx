@@ -81,7 +81,7 @@ export default function IndividualForm() {
       }
 
       setTimeout(() => {
-        navigateTo('listings');
+        navigateTo('landing');
       }, 2000);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -107,7 +107,7 @@ export default function IndividualForm() {
       setMessage({ type: 'success', text: t('successDelete') });
       
       setTimeout(() => {
-        navigateTo('listings');
+        navigateTo('landing');
       }, 2000);
     } catch (error) {
       console.error('Error deleting post:', error);

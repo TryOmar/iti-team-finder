@@ -13,13 +13,13 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
   const whatsappLink = buildWhatsAppLink(individual.phone);
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl hover:shadow-indigo-50 transition-all duration-300 relative overflow-hidden group flex flex-col h-full">
+    <div className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl hover:shadow-blue-50 transition-all duration-300 relative overflow-hidden group flex flex-col h-full">
       {/* Decorative gradient blob */}
-      <div className="absolute -top-20 -right-20 w-40 h-40 bg-indigo-50/60 rounded-full blur-3xl group-hover:bg-indigo-100/60 transition-colors duration-500 pointer-events-none" />
+      <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-50/60 rounded-full blur-3xl group-hover:bg-blue-100/60 transition-colors duration-500 pointer-events-none" />
 
       {/* Header: badge + WhatsApp */}
       <div className="flex justify-between items-start mb-5 relative z-10">
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-indigo-50 text-indigo-600 rounded-full text-[10px] font-bold uppercase tracking-wider">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase tracking-wider">
           <User className="w-3 h-3" />
           {t('individualPost')}
         </span>
@@ -36,10 +36,10 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
 
       {/* Name + Track */}
       <div className="mb-5 relative z-10">
-        <h3 className="text-xl font-bold text-gray-900 mb-2 leading-tight group-hover:text-indigo-600 transition-colors">
+        <h3 className="text-xl font-bold text-gray-900 mb-2 leading-tight group-hover:text-blue-600 transition-colors">
           {individual.name}
         </h3>
-        <div className="inline-flex items-center gap-1.5 text-indigo-500 bg-indigo-50/50 px-2.5 py-1 rounded-lg">
+        <div className="inline-flex items-center gap-1.5 text-blue-500 bg-blue-50/50 px-2.5 py-1 rounded-lg">
           <Briefcase className="w-3.5 h-3.5" />
           <span className="text-xs font-semibold uppercase tracking-wide">
             {t(`track${individual.track.replace('-', '')}`)}
@@ -56,7 +56,7 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
             {individual.roles.map((role, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 bg-white text-indigo-600 text-[11px] font-semibold rounded-lg border border-indigo-100 hover:border-indigo-200 transition-colors cursor-default"
+                className="px-3 py-1 bg-white text-blue-600 text-[11px] font-semibold rounded-lg border border-blue-100 hover:border-blue-200 transition-colors cursor-default"
               >
                 {role}
               </span>
@@ -68,7 +68,7 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
         {individual.skills && (
           <div>
             <SectionLabel icon={<Code className="w-3.5 h-3.5" />} label={t('skills')} />
-            <p className="text-sm text-gray-600 leading-relaxed pl-4 border-l-2 border-indigo-100">
+            <p className="text-sm text-gray-600 leading-relaxed pl-4 border-l-2 border-blue-100">
               {individual.skills}
             </p>
           </div>

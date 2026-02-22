@@ -4,7 +4,6 @@ import Header from './components/Header';
 import Landing from './pages/Landing';
 import IndividualForm from './pages/IndividualForm';
 import TeamForm from './pages/TeamForm';
-import Listings from './pages/Listings';
 import EditPost from './pages/EditPost';
 
 function AppContent() {
@@ -16,7 +15,6 @@ function AppContent() {
       {currentPage === 'landing' && <Landing />}
       {currentPage === 'individual-form' && <IndividualForm />}
       {currentPage === 'team-form' && <TeamForm />}
-      {currentPage === 'listings' && <Listings />}
       {currentPage === 'edit' && <EditPost />}
     </>
   );

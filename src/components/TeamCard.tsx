@@ -13,13 +13,13 @@ export default function TeamCard({ team }: TeamCardProps) {
   const whatsappLink = buildWhatsAppLink(team.contact);
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl hover:shadow-rose-50 transition-all duration-300 relative overflow-hidden group flex flex-col h-full">
+    <div className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl hover:shadow-emerald-50 transition-all duration-300 relative overflow-hidden group flex flex-col h-full">
       {/* Decorative gradient blob */}
-      <div className="absolute -top-20 -right-20 w-40 h-40 bg-rose-50/60 rounded-full blur-3xl group-hover:bg-rose-100/60 transition-colors duration-500 pointer-events-none" />
+      <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-50/60 rounded-full blur-3xl group-hover:bg-emerald-100/60 transition-colors duration-500 pointer-events-none" />
 
       {/* Header: badge + WhatsApp */}
       <div className="flex justify-between items-start mb-5 relative z-10">
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-rose-50 text-rose-600 rounded-full text-[10px] font-bold uppercase tracking-wider">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-emerald-600 rounded-full text-[10px] font-bold uppercase tracking-wider">
           <Users className="w-3 h-3" />
           {t('teamPost')}
         </span>
@@ -36,10 +36,10 @@ export default function TeamCard({ team }: TeamCardProps) {
 
       {/* Team Name + Track */}
       <div className="mb-5 relative z-10">
-        <h3 className="text-xl font-bold text-gray-900 mb-2 leading-tight group-hover:text-rose-600 transition-colors">
+        <h3 className="text-xl font-bold text-gray-900 mb-2 leading-tight group-hover:text-emerald-600 transition-colors">
           {team.team_name}
         </h3>
-        <div className="inline-flex items-center gap-1.5 text-rose-500 bg-rose-50/50 px-2.5 py-1 rounded-lg">
+        <div className="inline-flex items-center gap-1.5 text-emerald-500 bg-emerald-50/50 px-2.5 py-1 rounded-lg">
           <Briefcase className="w-3.5 h-3.5" />
           <span className="text-xs font-semibold uppercase tracking-wide">
             {t(`track${team.track.replace('-', '')}`)}
@@ -60,8 +60,8 @@ export default function TeamCard({ team }: TeamCardProps) {
           <StatBox
             label={t('needsMembers')}
             value={String(team.needed_members)}
-            icon={<Users className="w-4 h-4 text-rose-400" />}
-            variant="rose"
+            icon={<Users className="w-4 h-4 text-emerald-400" />}
+            variant="emerald"
           />
         </div>
 
@@ -72,7 +72,7 @@ export default function TeamCard({ team }: TeamCardProps) {
             {team.required_roles.map((role, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 bg-white text-rose-600 text-[11px] font-semibold rounded-lg border border-rose-100 hover:border-rose-200 transition-colors cursor-default"
+                className="px-3 py-1 bg-white text-emerald-600 text-[11px] font-semibold rounded-lg border border-emerald-100 hover:border-emerald-200 transition-colors cursor-default"
               >
                 {role}
               </span>
@@ -83,7 +83,7 @@ export default function TeamCard({ team }: TeamCardProps) {
         {/* Project Idea */}
         {team.project_idea && (
           <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 group-hover:bg-white transition-colors duration-300">
-            <span className="text-[10px] font-bold text-rose-400 uppercase tracking-widest block mb-2">
+            <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest block mb-2">
               {t('projectIdea')}
             </span>
             <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed">
@@ -127,12 +127,12 @@ interface StatBoxProps {
   label: string;
   value: string;
   icon: React.ReactNode;
-  variant: 'neutral' | 'rose';
+  variant: 'neutral' | 'emerald';
 }
 
 function StatBox({ label, value, icon, variant }: StatBoxProps) {
-  const bgStyles = variant === 'rose'
-    ? 'bg-rose-50/40 border-rose-50 group-hover:bg-rose-50/60'
+  const bgStyles = variant === 'emerald'
+    ? 'bg-emerald-50/40 border-emerald-50 group-hover:bg-emerald-50/60'
     : 'bg-gray-50 border-gray-100 group-hover:bg-white';
 
   return (
