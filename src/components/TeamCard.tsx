@@ -4,6 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
 import { useAuth } from '../contexts/AuthContext';
 import WhatsAppIcon from './WhatsAppIcon';
+import MarkdownText from './MarkdownText';
 
 interface TeamCardProps {
   team: Team;
@@ -121,9 +122,10 @@ export default function TeamCard({ team }: TeamCardProps) {
             <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest block mb-2">
               {t('projectIdea')}
             </span>
-            <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed">
-              {team.project_idea}
-            </p>
+            <MarkdownText 
+              text={team.project_idea} 
+              className="text-sm text-gray-600 leading-relaxed" 
+            />
           </div>
         )}
       </div>

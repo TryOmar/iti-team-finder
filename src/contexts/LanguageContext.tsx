@@ -14,7 +14,7 @@ const translations = {
   en: {
     appTitle: 'ITI Graduation Project',
     appSubtitle: 'Teammate Finder',
-    joinTeamButton: 'Join a Team',
+    findTeamButton: 'Find a Team',
     findMembersButton: 'Find Members',
     editPostButton: 'Edit/Delete My Posts',
     viewListings: 'View All Listings',
@@ -107,7 +107,7 @@ const translations = {
   ar: {
     appTitle: 'مشروع تخرج ITI',
     appSubtitle: 'البحث عن زملاء الفريق',
-    joinTeamButton: 'الانضمام لفريق',
+    findTeamButton: 'البحث عن فريق',
     findMembersButton: 'البحث عن أعضاء',
     editPostButton: 'تعديل/حذف منشوراتي',
     viewListings: 'عرض جميع الإعلانات',

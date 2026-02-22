@@ -14,7 +14,7 @@ export default function Landing() {
         <div className="grid md:grid-cols-2 gap-6 mb-20 max-w-3xl mx-auto">
           <ActionCard
             icon={<UserPlus className="w-8 h-8" />}
-            title={t('joinTeamButton')}
+            title={t('findTeamButton')}
             variant="blue"
             onClick={() => navigateTo('individual-form')}
           />

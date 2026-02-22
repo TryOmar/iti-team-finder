@@ -4,6 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
 import { useAuth } from '../contexts/AuthContext';
 import WhatsAppIcon from './WhatsAppIcon';
+import MarkdownText from './MarkdownText';
 
 interface IndividualCardProps {
   individual: Individual;
@@ -103,9 +104,10 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
         {individual.skills && (
           <div>
             <SectionLabel icon={<Code className="w-3.5 h-3.5" />} label={t('skills')} />
-            <p className="text-sm text-gray-600 leading-relaxed pl-4 border-l-2 border-blue-100">
-              {individual.skills}
-            </p>
+            <MarkdownText 
+              text={individual.skills} 
+              className="text-sm text-gray-600 leading-relaxed pl-4 border-l-2 border-blue-100" 
+            />
           </div>
         )}
 
@@ -114,9 +116,10 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
           <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">
             {t('aboutYou')}
           </span>
-          <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed">
-            {individual.description}
-          </p>
+          <MarkdownText 
+            text={individual.description} 
+            className="text-sm text-gray-600 leading-relaxed" 
+          />
         </div>
       </div>
 
