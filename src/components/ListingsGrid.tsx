@@ -14,6 +14,7 @@ const ROLES = [
   'roleMobile',
   'roleDevOps',
   'roleQA',
+  'roleOther',
 ];
 
 interface ListingsGridProps {

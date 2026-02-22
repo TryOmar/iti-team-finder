@@ -13,6 +13,7 @@ const roles = [
   'roleMobile',
   'roleDevOps',
   'roleQA',
+  'roleOther',
 ];
 
 export default function TeamForm() {

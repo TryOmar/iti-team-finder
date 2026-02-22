@@ -51,6 +51,7 @@ const translations = {
     roleMobile: 'Mobile Developer',
     roleDevOps: 'DevOps',
     roleQA: 'QA/Testing',
+    roleOther: 'Other',
 
     submitButton: 'Submit',
     updateButton: 'Update',
@@ -136,6 +137,7 @@ const translations = {
     roleMobile: 'مطور تطبيقات الموبايل',
     roleDevOps: 'DevOps',
     roleQA: 'ضمان الجودة/الاختبار',
+    roleOther: 'أخرى',
 
     submitButton: 'إرسال',
     updateButton: 'تحديث',
