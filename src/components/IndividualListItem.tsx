@@ -24,7 +24,7 @@ export default function IndividualListItem({ individual }: IndividualListItemPro
   };
 
   return (
-    <div className={`bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md hover:shadow-blue-50 transition-all duration-300 group flex flex-col sm:flex-row items-start sm:items-center gap-4 ${individual.status === 'closed' ? 'opacity-75' : ''}`}>
+    <div className={`bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md hover:shadow-blue-50 transition-all duration-300 group flex flex-col sm:flex-row items-start sm:items-center gap-4 ${individual.status === 'closed' ? 'opacity-60 grayscale-[0.6] saturate-50 bg-gray-50/50' : ''}`}>
       <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-4 min-w-0 w-full">
         {/* Type & Name */}
         <div className="flex items-center gap-3 min-w-0 w-full sm:w-auto shrink-0 sm:min-w-[200px]">
@@ -36,20 +36,16 @@ export default function IndividualListItem({ individual }: IndividualListItemPro
               {individual.name}
             </h3>
             <div className="flex items-center gap-2 mt-0.5 flex-wrap">
-              <span className="text-[10px] font-bold text-blue-600 bg-blue-50/80 px-2 py-0.5 rounded-md uppercase tracking-wider">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase tracking-wider border border-blue-100/50">
                 {t('individualPost')}
               </span>
-              {individual.status === 'closed' && (
-                <span className="text-[10px] font-bold text-red-600 bg-red-50/80 px-2 py-0.5 rounded-md uppercase tracking-wider">
-                  Closed
-                </span>
-              )}
               {isMyPost && (
-                <span className="text-[10px] font-bold text-white bg-red-600 px-2 py-0.5 rounded-md uppercase tracking-wider shadow-sm">
-                  {t('language') === 'ar' ? 'منشورك' : 'Your Post'}
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-red-50 text-red-600 rounded-full text-[10px] font-bold uppercase tracking-wider border border-red-100">
+                  <div className="w-1 h-1 rounded-full bg-red-500" />
+                  {t('language') === 'ar' ? 'منشورك' : 'MINE'}
                 </span>
               )}
-              <span className="text-xs font-semibold text-gray-500 flex items-center gap-1">
+              <span className="text-xs font-semibold text-gray-400 flex items-center gap-1 ml-1">
                 <Briefcase className="w-3 h-3" />
                 {t(`track${individual.track.replace('-', '')}`)}
               </span>
@@ -86,18 +82,25 @@ export default function IndividualListItem({ individual }: IndividualListItemPro
         </div>
       </div>
 
-      {/* Actions */}
       <div className="flex items-center gap-4 shrink-0 w-full sm:w-auto justify-end mt-2 sm:mt-0 pt-3 sm:pt-0 border-t sm:border-transparent border-gray-100">
-        <span className="text-xs text-gray-400 hidden sm:block">
-          {new Date(individual.created_at).toLocaleDateString()}
-        </span>
+        <div className="flex flex-col items-end gap-1">
+          {individual.status === 'closed' && (
+            <span className="text-[9px] font-black text-red-500 uppercase tracking-[0.2em] bg-red-50 px-2 py-0.5 rounded border border-red-100 flex items-center gap-1.5 whitespace-nowrap">
+              <div className="w-1 h-1 rounded-full bg-red-500 animate-pulse" />
+              Closed
+            </span>
+          )}
+          <span className="text-xs text-gray-400 hidden sm:block">
+            {new Date(individual.created_at).toLocaleDateString()}
+          </span>
+        </div>
         {isMyPost && (
           <button
             onClick={handleEdit}
-            className="flex items-center gap-2 px-3 py-2 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg transition-all duration-200 border border-red-200 shadow-sm"
+            className="group/edit flex items-center gap-2 px-3 py-2 bg-white text-gray-700 hover:text-red-700 hover:bg-red-50 rounded-lg transition-all duration-200 border border-gray-100 hover:border-red-200 shadow-sm hover:shadow"
             title={t('editPostButton')}
           >
-            <Settings className="w-4 h-4" />
+            <Settings className="w-4 h-4 group-hover/edit:rotate-90 transition-transform duration-500" />
             <span className="text-xs font-bold">{t('language') === 'ar' ? 'تعديل' : 'Edit'}</span>
           </button>
         )}

@@ -24,37 +24,32 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
   };
 
   return (
-    <div className={`bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl hover:shadow-blue-50 transition-all duration-300 relative overflow-hidden group flex flex-col h-full ${individual.status === 'closed' ? 'opacity-75' : ''}`}>
+    <div className={`bg-white rounded-2xl border ${isMyPost ? 'border-red-200 shadow-lg shadow-red-50/50' : 'border-gray-100'} p-6 hover:shadow-xl hover:shadow-blue-50 transition-all duration-300 relative overflow-hidden group flex flex-col h-full ${individual.status === 'closed' ? 'opacity-60 grayscale-[0.6] saturate-50' : ''}`}>
       {/* Decorative gradient blob */}
       <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-50/60 rounded-full blur-3xl group-hover:bg-blue-100/60 transition-colors duration-500 pointer-events-none" />
 
       {/* Header: badge + WhatsApp */}
       <div className="flex justify-between items-start mb-5 relative z-10">
-        <div className="flex flex-col gap-2">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit">
+        <div className="flex items-center gap-2">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase tracking-wider border border-blue-100/50 shadow-sm">
             <User className="w-3 h-3" />
             {t('individualPost')}
           </span>
-          {individual.status === 'closed' && (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-red-50 text-red-600 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit">
-              Closed
-            </span>
-          )}
           {isMyPost && (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-red-600 text-white rounded-full text-[10px] font-bold uppercase tracking-wider w-fit shadow-sm">
-              <Settings className="w-3 h-3" />
-              {t('language') === 'ar' ? 'منشورك' : 'Your Post'}
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-50 text-red-600 rounded-full text-[10px] font-bold uppercase tracking-wider border border-red-100 shadow-sm">
+              <div className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]" />
+              {t('language') === 'ar' ? 'منشورك' : 'MINE'}
             </span>
           )}
         </div>
         <div className="flex items-center gap-2">
-          {isMyPost && (
+          {isMyPost && (/* ... handleEdit button content ... */
             <button
               onClick={handleEdit}
-              className="flex items-center gap-2 px-3 py-2 bg-red-100 text-red-700 hover:bg-red-200 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 border border-red-200"
+              className="group/edit flex items-center gap-2 px-3 py-2 bg-white text-gray-700 hover:text-red-700 hover:bg-red-50 rounded-xl transition-all duration-200 shadow-sm hover:shadow border border-gray-100 hover:border-red-200"
               title={t('editPostButton')}
             >
-              <Settings className="w-4 h-4" />
+              <Settings className="w-4 h-4 group-hover/edit:rotate-90 transition-transform duration-500" />
               <span className="text-xs font-bold">{t('language') === 'ar' ? 'تعديل' : 'Edit'}</span>
             </button>
           )}
@@ -126,8 +121,6 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
           />
         </div>
       </div>
-
-      {/* Footer */}
       <div className="mt-6 pt-5 border-t border-gray-100 flex items-center justify-between relative z-10">
         <a
           href={whatsappLink}
@@ -138,9 +131,17 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
           <Phone className="w-3.5 h-3.5" />
           <span>{individual.phone}</span>
         </a>
-        <span className="text-[10px] text-gray-400 font-medium">
-          {new Date(individual.created_at).toLocaleDateString()}
-        </span>
+        <div className="flex flex-col items-end gap-1">
+          {individual.status === 'closed' && (
+            <span className="text-[9px] font-black text-red-500 uppercase tracking-[0.2em] bg-red-50 px-2 py-0.5 rounded border border-red-100 flex items-center gap-1.5">
+              <div className="w-1 h-1 rounded-full bg-red-500 animate-pulse" />
+              Closed
+            </span>
+          )}
+          <span className="text-[10px] text-gray-400 font-medium">
+            {new Date(individual.created_at).toLocaleDateString()}
+          </span>
+        </div>
       </div>
     </div>
   );
