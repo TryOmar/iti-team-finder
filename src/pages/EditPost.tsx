@@ -47,10 +47,6 @@ export default function EditPost() {
 
       if (foundResults.length === 0) {
         setMessage({ type: 'error', text: t('noPostFound') });
-      } else if (foundResults.length === 1) {
-        const result = foundResults[0];
-        setEditData({ type: result.type, data: result.data });
-        navigateTo(result.type === 'individual' ? 'individual-form' : 'team-form');
       }
     } catch (error) {
       console.error('Error searching for post:', error);
