@@ -21,9 +21,6 @@ export default function Landing() {
               {t('appSubtitle')}
             </span>
           </h2>
-          <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            {t('heroDescription')}
-          </p>
         </div>
 
         {/* Action Buttons */}
@@ -31,22 +28,12 @@ export default function Landing() {
           <ActionCard
             icon={<UserPlus className="w-8 h-8" />}
             title={t('joinTeamButton')}
-            subtitle={
-              t('language') === 'ar'
-                ? 'سجل كفرد يبحث عن فريق'
-                : 'Register as an individual looking for a team'
-            }
             variant="blue"
             onClick={() => navigateTo('individual-form')}
           />
           <ActionCard
             icon={<Users className="w-8 h-8" />}
             title={t('findMembersButton')}
-            subtitle={
-              t('language') === 'ar'
-                ? 'سجل فريقك للبحث عن أعضاء'
-                : 'Register your team to find members'
-            }
             variant="emerald"
             onClick={() => navigateTo('team-form')}
           />
@@ -59,11 +46,6 @@ export default function Landing() {
               <h3 className="text-2xl font-bold text-gray-900 mb-1">
                 {t('viewListings')}
               </h3>
-              <p className="text-gray-400 text-sm">
-                {t('language') === 'ar'
-                  ? 'استكشف الأفراد والفرق المتاحة'
-                  : 'Explore available individuals and teams'}
-              </p>
             </div>
 
             <button
@@ -86,12 +68,11 @@ export default function Landing() {
 interface ActionCardProps {
   icon: React.ReactNode;
   title: string;
-  subtitle: string;
   variant: 'blue' | 'emerald';
   onClick: () => void;
 }
 
-function ActionCard({ icon, title, subtitle, variant, onClick }: ActionCardProps) {
+function ActionCard({ icon, title, variant, onClick }: ActionCardProps) {
   const styles = {
     blue: {
       border: 'border-blue-100 hover:border-blue-300',
@@ -122,9 +103,6 @@ function ActionCard({ icon, title, subtitle, variant, onClick }: ActionCardProps
           <h3 className={`text-xl font-bold ${s.titleColor} transition-colors mb-1.5`}>
             {title}
           </h3>
-          <p className="text-sm text-gray-400 group-hover:text-gray-500 transition-colors">
-            {subtitle}
-          </p>
         </div>
       </div>
     </button>
