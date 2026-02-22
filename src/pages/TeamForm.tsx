@@ -278,7 +278,13 @@ export default function TeamForm() {
                 disabled={loading || formData.required_roles.length === 0}
                 className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-300 text-white font-medium py-3 rounded-lg transition-colors"
               >
-                {loading ? '...' : isEditMode ? t('updateButton') : t('submitButton')}
+                {loading ? (
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>
+                ) : isEditMode ? (
+                  t('updateButton')
+                ) : (
+                  t('submitButton')
+                )}
               </button>
 
               {isEditMode && (
