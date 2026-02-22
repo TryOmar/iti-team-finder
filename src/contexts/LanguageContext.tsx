@@ -98,7 +98,7 @@ const translations = {
     logout: 'Logout',
     loggedInAs: 'Logged in as',
 
-    phonePlaceholder: '+20 xxx xxx xxxx',
+    phonePlaceholder: '+201xxxxxxxxx',
     skillsPlaceholder: 'e.g., React, Node.js, MongoDB',
     descriptionPlaceholder: 'Tell us about yourself, your interests, and what you bring to a team...',
     projectIdeaPlaceholder: 'Mention what you need, your current state, or any other notes (optional)...',
@@ -190,7 +190,7 @@ const translations = {
     logout: 'تسجيل الخروج',
     loggedInAs: 'مسجل دخول بـ',
 
-    phonePlaceholder: '+20 xxx xxx xxxx',
+    phonePlaceholder: '+201xxxxxxxxx',
     skillsPlaceholder: 'مثال: React, Node.js, MongoDB',
     descriptionPlaceholder: 'أخبرنا عن نفسك واهتماماتك وما تقدمه للفريق...',
     projectIdeaPlaceholder: 'اذكر ما تحتاجه، وضعك الحالي، أو أي ملاحظات أخرى (اختياري)...',

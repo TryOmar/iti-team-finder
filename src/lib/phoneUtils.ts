@@ -19,10 +19,5 @@ export function formatPhoneNumber(phone: string): string {
     }
   }
 
-  // Ensure there's a space after +20 for readability
-  if (p.startsWith('+20') && p.charAt(3) !== ' ') {
-    p = '+20 ' + p.substring(3);
-  }
-
   return p;
 }

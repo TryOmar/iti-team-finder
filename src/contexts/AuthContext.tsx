@@ -11,12 +11,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [userPhone, setUserPhone] = useState<string | null>(() => {
-    return localStorage.getItem('userPhone');
+    const saved = localStorage.getItem('userPhone');
+    return saved ? saved.replace(/\s/g, '') : null;
   });
 
   const login = (phone: string) => {
-    localStorage.setItem('userPhone', phone);
-    setUserPhone(phone);
+    const cleanPhone = phone.replace(/\s/g, '');
+    localStorage.setItem('userPhone', cleanPhone);
+    setUserPhone(cleanPhone);
   };
 
   const logout = () => {
