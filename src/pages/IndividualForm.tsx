@@ -19,7 +19,7 @@ const roles = [
 ];
 
 export default function IndividualForm() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { navigateTo, editData } = useNavigation();
   const { login } = useAuth();
 
@@ -80,7 +80,7 @@ export default function IndividualForm() {
             skills: formData.skills,
             description: formData.description,
             phone: formattedPhone,
-            language: t('language'),
+            language: language,
             status: formData.status,
           },
         ]);
