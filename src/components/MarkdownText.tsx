@@ -4,6 +4,8 @@ interface MarkdownTextProps {
   text: string;
   className?: string;
   maxLength?: number;
+  showLessLabel?: string;
+  viewMoreLabel?: string;
 }
 
 /**
@@ -12,7 +14,13 @@ interface MarkdownTextProps {
  * 2. Bold text (via **bold**)
  * 3. Collapsible "View More" for long text
  */
-export default function MarkdownText({ text, className = '', maxLength = 200 }: MarkdownTextProps) {
+export default function MarkdownText({ 
+  text, 
+  className = '', 
+  maxLength = 200,
+  showLessLabel = 'Show Less',
+  viewMoreLabel = 'View More'
+}: MarkdownTextProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (!text) return null;
@@ -41,9 +49,9 @@ export default function MarkdownText({ text, className = '', maxLength = 200 }: 
       {shouldCollapse && (
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="mt-2 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-1"
+          className="mt-2 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-1 focus:outline-none"
         >
-          {isExpanded ? 'Show Less' : 'View More'}
+          {isExpanded ? showLessLabel : viewMoreLabel}
         </button>
       )}
     </div>

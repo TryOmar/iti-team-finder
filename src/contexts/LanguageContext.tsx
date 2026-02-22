@@ -103,6 +103,8 @@ const translations = {
     descriptionPlaceholder: 'Tell us about yourself, your interests, and what you bring to a team...',
     projectIdeaPlaceholder: 'Mention what you need, your current state, or any other notes (optional)...',
     searchingAs: 'Searching as',
+    viewMore: 'View More',
+    showLess: 'Show Less',
   },
   ar: {
     appTitle: 'مشروع تخرج ITI',
@@ -196,6 +198,8 @@ const translations = {
     descriptionPlaceholder: 'أخبرنا عن نفسك واهتماماتك وما تقدمه للفريق...',
     projectIdeaPlaceholder: 'اذكر ما تحتاجه، وضعك الحالي، أو أي ملاحظات أخرى (اختياري)...',
     searchingAs: 'سيتم البحث بـ',
+    viewMore: 'عرض المزيد',
+    showLess: 'عرض أقل',
   },
 };
 

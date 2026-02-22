@@ -107,6 +107,8 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
             <MarkdownText 
               text={individual.skills} 
               className="text-sm text-gray-600 leading-relaxed pl-4 border-l-2 border-blue-100" 
+              viewMoreLabel={t('viewMore')}
+              showLessLabel={t('showLess')}
             />
           </div>
         )}
@@ -119,6 +121,8 @@ export default function IndividualCard({ individual }: IndividualCardProps) {
           <MarkdownText 
             text={individual.description} 
             className="text-sm text-gray-600 leading-relaxed" 
+            viewMoreLabel={t('viewMore')}
+            showLessLabel={t('showLess')}
           />
         </div>
       </div>

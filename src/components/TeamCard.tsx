@@ -125,6 +125,8 @@ export default function TeamCard({ team }: TeamCardProps) {
             <MarkdownText 
               text={team.project_idea} 
               className="text-sm text-gray-600 leading-relaxed" 
+              viewMoreLabel={t('viewMore')}
+              showLessLabel={t('showLess')}
             />
           </div>
         )}

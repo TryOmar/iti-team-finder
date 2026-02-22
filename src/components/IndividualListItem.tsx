@@ -4,6 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
 import { useAuth } from '../contexts/AuthContext';
 import WhatsAppIcon from './WhatsAppIcon';
+import MarkdownText from './MarkdownText';
 
 interface IndividualListItemProps {
   individual: Individual;
@@ -75,9 +76,13 @@ export default function IndividualListItem({ individual }: IndividualListItemPro
 
         {/* About Preview */}
         <div className="hidden md:block flex-1 shrink min-w-0 px-4 border-l border-gray-100">
-          <p className="text-sm text-gray-500 truncate" title={individual.description}>
-            {individual.description}
-          </p>
+          <MarkdownText 
+            text={individual.description} 
+            className="text-sm text-gray-500" 
+            maxLength={100}
+            viewMoreLabel={t('viewMore')}
+            showLessLabel={t('showLess')}
+          />
         </div>
       </div>
 

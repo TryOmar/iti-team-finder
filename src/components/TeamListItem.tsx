@@ -4,6 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
 import { useAuth } from '../contexts/AuthContext';
 import WhatsAppIcon from './WhatsAppIcon';
+import MarkdownText from './MarkdownText';
 
 interface TeamListItemProps {
   team: Team;
@@ -74,7 +75,7 @@ export default function TeamListItem({ team }: TeamListItemProps) {
         </div>
 
         {/* Size Stats */}
-        <div className="hidden md:flex flex-1 shrink min-w-0 px-4 border-l border-gray-100 items-center gap-4">
+        <div className="hidden md:flex shrink-0 px-4 border-l border-gray-100 items-center gap-4">
           <div className="flex items-center gap-1.5" title={t('currentSize')}>
             <Hash className="w-4 h-4 text-gray-400" />
             <span className="font-semibold text-sm text-gray-700">{team.current_size}</span>
@@ -85,6 +86,19 @@ export default function TeamListItem({ team }: TeamListItemProps) {
             <span className="text-xs text-gray-500 font-medium ml-0.5">{t('needsMembers')}</span>
           </div>
         </div>
+
+        {/* Project Idea Preview */}
+        {team.project_idea && (
+          <div className="hidden lg:block flex-1 shrink min-w-0 px-4 border-l border-gray-100">
+            <MarkdownText 
+              text={team.project_idea} 
+              className="text-sm text-gray-500" 
+              maxLength={100}
+              viewMoreLabel={t('viewMore')}
+              showLessLabel={t('showLess')}
+            />
+          </div>
+        )}
       </div>
 
       {/* Actions */}
