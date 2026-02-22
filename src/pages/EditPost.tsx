@@ -3,6 +3,7 @@ import { ArrowLeft, Settings, Phone, Search, User, Users, ChevronRight } from 'l
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
 import { supabase, Individual, Team } from '../lib/supabase';
+import { formatPhoneNumber } from '../lib/phoneUtils';
 
 type SearchResult = 
   | { type: 'individual'; data: Individual }
@@ -25,9 +26,10 @@ export default function EditPost() {
     setHasSearched(false);
 
     try {
+      const formattedPhone = formatPhoneNumber(phone);
       const [individualRes, teamRes] = await Promise.all([
-        supabase.from('individuals').select('*').eq('phone', phone),
-        supabase.from('teams').select('*').eq('contact', phone),
+        supabase.from('individuals').select('*').in('phone', [phone, formattedPhone]),
+        supabase.from('teams').select('*').in('contact', [phone, formattedPhone]),
       ]);
 
       const foundResults: SearchResult[] = [

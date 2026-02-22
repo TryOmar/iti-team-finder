@@ -3,6 +3,7 @@ import { ArrowLeft, UserPlus, Phone, Briefcase, Code, FileText, Trash2 } from 'l
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
 import { supabase } from '../lib/supabase';
+import { formatPhoneNumber } from '../lib/phoneUtils';
 
 const tracks = ['PWD', 'OS', 'UI-UX'];
 const roles = [
@@ -65,6 +66,7 @@ export default function IndividualForm() {
         if (error) throw error;
         setMessage({ type: 'success', text: t('successUpdate') });
       } else {
+        const formattedPhone = formatPhoneNumber(formData.phone);
         const { error } = await supabase.from('individuals').insert([
           {
             name: formData.name,
@@ -72,7 +74,7 @@ export default function IndividualForm() {
             roles: formData.roles,
             skills: formData.skills,
             description: formData.description,
-            phone: formData.phone,
+            phone: formattedPhone,
             language: t('language'),
           },
         ]);

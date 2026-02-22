@@ -18,6 +18,8 @@ const translations = {
     findMembersButton: 'Find Members',
     editPostButton: 'Edit/Delete My Posts',
     viewListings: 'View All Listings',
+    gridView: 'Grid View',
+    listView: 'List View',
 
     individualFormTitle: 'Looking for a Team',
     teamFormTitle: 'Team Looking for Members',
@@ -105,6 +107,8 @@ const translations = {
     findMembersButton: 'البحث عن أعضاء',
     editPostButton: 'تعديل/حذف منشوراتي',
     viewListings: 'عرض جميع الإعلانات',
+    gridView: 'عرض كشبكة',
+    listView: 'عرض كقائمة',
 
     individualFormTitle: 'أبحث عن فريق',
     teamFormTitle: 'فريق يبحث عن أعضاء',

@@ -3,6 +3,7 @@ import { ArrowLeft, Users, Phone, Briefcase, Code, FileText, Hash, Trash2 } from
 import { useLanguage } from '../contexts/LanguageContext';
 import { useNavigation } from '../contexts/NavigationContext';
 import { supabase } from '../lib/supabase';
+import { formatPhoneNumber } from '../lib/phoneUtils';
 
 const tracks = ['PWD', 'OS', 'UI-UX'];
 const roles = [
@@ -67,6 +68,7 @@ export default function TeamForm() {
         if (error) throw error;
         setMessage({ type: 'success', text: t('successUpdate') });
       } else {
+        const formattedPhone = formatPhoneNumber(formData.contact);
         const { error } = await supabase.from('teams').insert([
           {
             team_name: formData.team_name,
@@ -75,7 +77,7 @@ export default function TeamForm() {
             needed_members: formData.needed_members,
             required_roles: formData.required_roles,
             project_idea: formData.project_idea,
-            contact: formData.contact,
+            contact: formattedPhone,
           },
         ]);
 

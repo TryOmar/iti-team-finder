@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Briefcase, Code, SlidersHorizontal, X } from 'lucide-react';
+import { Briefcase, Code, SlidersHorizontal, X, LayoutGrid, List } from 'lucide-react';
 import { supabase, Individual, Team } from '../lib/supabase';
 import { useLanguage } from '../contexts/LanguageContext';
 import IndividualCard from './IndividualCard';
 import TeamCard from './TeamCard';
+import IndividualListItem from './IndividualListItem';
+import TeamListItem from './TeamListItem';
 
 const TRACKS = ['PWD', 'OS', 'UI-UX'];
 const ROLES = [
@@ -30,6 +32,7 @@ export default function ListingsGrid({ limit, showFilters = false }: ListingsGri
   const [trackFilter, setTrackFilter] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
   const [activeTab, setActiveTab] = useState<'all' | 'individuals' | 'teams'>('all');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
     fetchData();
@@ -95,8 +98,8 @@ export default function ListingsGrid({ limit, showFilters = false }: ListingsGri
     <div>
       {showFilters && (
         <div className="mb-8 space-y-4">
-          {/* Tab Switcher */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          {/* Tab Switcher & View Toggle */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full">
             <div className="inline-flex p-1 bg-gray-100 rounded-xl">
               <TabButton
                 active={activeTab === 'all'}
@@ -118,15 +121,34 @@ export default function ListingsGrid({ limit, showFilters = false }: ListingsGri
               />
             </div>
 
-            {hasActiveFilters && (
-              <button
-                onClick={clearAllFilters}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <X className="w-3.5 h-3.5" />
-                <span>{t('language') === 'ar' ? 'مسح الفلاتر' : 'Clear filters'}</span>
-              </button>
-            )}
+            <div className="flex items-center gap-3 self-end sm:self-auto">
+              <div className="inline-flex bg-gray-100 rounded-lg p-1">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                  title={t('gridView')}
+                >
+                  <LayoutGrid className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-1.5 rounded-md transition-colors ${viewMode === 'list' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                  title={t('listView')}
+                >
+                  <List className="w-4 h-4" />
+                </button>
+              </div>
+
+              {hasActiveFilters && (
+                <button
+                  onClick={clearAllFilters}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <X className="w-3.5 h-3.5" />
+                  <span>{t('language') === 'ar' ? 'مسح الفلاتر' : 'Clear filters'}</span>
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Filters Row */}
@@ -210,12 +232,20 @@ export default function ListingsGrid({ limit, showFilters = false }: ListingsGri
           </div>
         </div>
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className={viewMode === 'grid' ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6" : "flex flex-col gap-4"}>
           {displayedListings.map(item =>
             item.type === 'individual' ? (
-              <IndividualCard key={item.id} individual={item as Individual} />
+              viewMode === 'grid' ? (
+                <IndividualCard key={item.id} individual={item as Individual} />
+              ) : (
+                <IndividualListItem key={item.id} individual={item as Individual} />
+              )
             ) : (
-              <TeamCard key={item.id} team={item as Team} />
+              viewMode === 'grid' ? (
+                <TeamCard key={item.id} team={item as Team} />
+              ) : (
+                <TeamListItem key={item.id} team={item as Team} />
+              )
             )
           )}
         </div>
